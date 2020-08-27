@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/vue-crm/precache-manifest.144e48c211f3a50d0e29304dc90b8f21.js"
+  "/precache-manifest.3136b67805e8bbcb5895f035f1cf6653.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "crm"});

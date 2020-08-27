@@ -1,6 +1,4 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/vue-crm/'
-    : '/',
-  outputDir: 'docs'
+  outputDir: 'dist',
+  productionSourceMap: false
 };
