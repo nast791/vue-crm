@@ -17,10 +17,10 @@ const routes = [
     component: () => import('../views/Categories')
   },
   {
-    path: '/detail-record',
-    name: 'detail-record',
+    path: '/detail/:id',
+    name: 'detail',
     meta: {layout: 'main'},
-    component: () => import('../views/DetailRecord')
+    component: () => import('../views/Detail')
   },
   {
     path: '/history',
