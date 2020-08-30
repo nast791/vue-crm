@@ -21,12 +21,12 @@
     }),
     computed: {
       base() {
-        return this.$store.getters.info.bill / (this.rates['RUB'] / this.rates['USD']);
+        return +this.$store.getters.info.bill / (+this.rates['RUB'] / +this.rates['USD']);
       }
     },
     methods: {
       getCurrency(currency) {
-        return Math.floor(this.base * this.rates[currency]);
+        return Math.floor(this.base * +this.rates[currency]);
       }
     }
   }
