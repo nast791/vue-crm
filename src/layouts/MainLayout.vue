@@ -23,6 +23,8 @@
 </template>
 
 <script>
+  import messages from "../utils/messages";
+
   export default {
     name: 'main-layout',
     data: () => ({
@@ -38,6 +40,16 @@
         await this.$store.dispatch('fetchInfo');
       }
       this.loading = false;
+    },
+    computed: {
+      error() {
+        return this.$store.getters.error
+      }
+    },
+    watch: {
+      error(fbError) {
+        this.$error(messages[fbError.code] || 'Что-то пошло не так');
+      }
     }
   }
 </script>

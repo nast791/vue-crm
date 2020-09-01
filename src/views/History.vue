@@ -8,42 +8,39 @@
       <canvas></canvas>
     </div>
 
-    <section>
-      <table>
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Сумма</th>
-          <th>Дата</th>
-          <th>Категория</th>
-          <th>Тип</th>
-          <th>Открыть</th>
-        </tr>
-        </thead>
+    <Loader v-if="loading" />
+    <p class="center" v-else-if="!records.length">Записей пока нет</p>
 
-        <tbody>
-        <tr>
-          <td>1</td>
-          <td>1212</td>
-          <td>12.12.32</td>
-          <td>name</td>
-          <td>
-            <span class="white-text badge red">Расход</span>
-          </td>
-          <td>
-            <button class="btn-small btn">
-              <i class="material-icons">open_in_new</i>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <section v-else>
+      <HistoryTable :records="records"/>
     </section>
   </div>
 </template>
 
 <script>
   export default {
-    name: "History"
+    name: "History",
+    data: () => ({
+      loading: true,
+      records: [],
+      categories: []
+    }),
+    async mounted() {
+      // this.records = await this.$store.dispatch('fetchRecords');
+      const records = await this.$store.dispatch('fetchRecords');
+      this.categories = await this.$store.dispatch('fetchCategories');
+      this.records = records.map(it => {
+        return {
+          ...it,
+          categoryName: this.categories.find(item => item.id = it.categoryId).title,
+          typeClass: it.type === 'income' ? 'green' : 'red',
+          typeText: it.type === 'income' ? 'Доход' : 'Расход'
+        }
+      });
+      this.loading = false;
+    },
+    components: {
+      HistoryTable: () => import('../components/HistoryTable')
+    }
   }
 </script>

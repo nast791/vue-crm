@@ -7,6 +7,7 @@ import dateFilter from "./filters/date";
 import currencyFilter from "./filters/currency";
 import curFixed from "./filters/curFixed";
 import Loader from "./components/app/Loader";
+import tooltip from "./directives/tooltip";
 import messagePlugin from './utils/message.plugin';
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
@@ -21,6 +22,7 @@ Vue.use(Vuelidate);
 Vue.filter('date', dateFilter);
 Vue.filter('currency', currencyFilter);
 Vue.filter('curFixed', curFixed);
+Vue.directive('tooltip', tooltip);
 Vue.component('Loader', Loader);
 
 firebase.initializeApp({
