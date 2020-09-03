@@ -9,6 +9,7 @@ import curFixed from "./filters/curFixed";
 import Loader from "./components/app/Loader";
 import tooltip from "./directives/tooltip";
 import messagePlugin from './utils/message.plugin';
+import Paginate from 'vuejs-paginate';
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
 import firebase from 'firebase/app';
@@ -24,6 +25,7 @@ Vue.filter('currency', currencyFilter);
 Vue.filter('curFixed', curFixed);
 Vue.directive('tooltip', tooltip);
 Vue.component('Loader', Loader);
+Vue.component('Paginate', Paginate);
 
 firebase.initializeApp({
   apiKey: "AIzaSyBZG2mL--IcghxyAsI1mSZhnARd_90NNsg",
