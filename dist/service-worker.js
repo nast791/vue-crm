@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.ced30a658f7a7efefd5933e53356c548.js"
+  "/precache-manifest.9f309a3cbdc0a38fb062658392ac113b.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "crm"});

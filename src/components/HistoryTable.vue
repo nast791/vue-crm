@@ -12,8 +12,8 @@
     </thead>
 
     <tbody>
-    <tr v-for="(item, idx) of records" :key="item.id">
-      <td>{{idx + 1}}</td>
+    <tr v-for="item of records" :key="item.id">
+      <td>{{item.index}}</td>
       <td>{{item.amount | currency('RUB')}}</td>
       <td>{{item.date | date('datetime')}}</td>
       <td>{{item.categoryName}}</td>
