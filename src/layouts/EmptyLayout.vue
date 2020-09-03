@@ -6,6 +6,7 @@
 
 <script>
   import messages from "../utils/messages";
+  import localizeFilter from "../filters/localize";
 
   export default {
     computed: {
@@ -15,7 +16,7 @@
     },
     watch: {
       error(fbError) {
-        this.$error(messages[fbError.code] || 'Что-то пошло не так');
+        this.$error(localizeFilter(messages[fbError.code]) || localizeFilter('RandomError'));
       }
     }
   }

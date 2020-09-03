@@ -3,7 +3,7 @@
     <Loader v-if="loading"/>
     <template v-else>
       <Navbar v-on:click="isOpen = !isOpen"/>
-      <Sidebar :isOpen="isOpen"/>
+      <Sidebar :isOpen="isOpen" :key="locale"/>
 
       <div class="app-main-layout">
         <main class="app-content" :class="{full: !isOpen}">
@@ -24,6 +24,7 @@
 
 <script>
   import messages from "../utils/messages";
+  import localizeFilter from "../filters/localize";
 
   export default {
     name: 'main-layout',
@@ -36,19 +37,22 @@
       Sidebar: () => import('@/components/app/Sidebar')
     },
     async mounted() {
-      if (!Object.keys(this.$store.getters.info).length) {
+      if (!this.$store.getters.info.bill || !this.$store.getters.info.name) {
         await this.$store.dispatch('fetchInfo');
       }
       this.loading = false;
     },
     computed: {
       error() {
-        return this.$store.getters.error
+        return this.$store.getters.error;
+      },
+      locale() {
+        return this.$store.getters.info.locale;
       }
     },
     watch: {
       error(fbError) {
-        this.$error(messages[fbError.code] || 'Что-то пошло не так');
+        this.$error(localizeFilter(messages[fbError.code]) || localizeFilter('RandomError'));
       }
     }
   }

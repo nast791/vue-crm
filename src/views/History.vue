@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>История записей</h3>
+      <h3>{{'History_Title'|localize}}</h3>
     </div>
 
     <div class="history-chart">
@@ -9,11 +9,11 @@
     </div>
 
     <Loader v-if="loading" />
-    <p class="center" v-else-if="!records.length">Записей пока нет</p>
+    <p class="center" v-else-if="!records.length">{{'NoRecords'|localize}}</p>
 
     <section v-else>
       <HistoryTable :records="items"/>
-      <Paginate v-model="page" :page-count="pageCount" :click-handler="pageChangeHandler" :prev-text="'Назад'" :next-text="'Вперед'" :container-class="'pagination'" :page-class="'waves-effect'"/>
+      <Paginate v-model="page" :page-count="pageCount" :click-handler="pageChangeHandler" :prev-text="'Back' | localize" :next-text="'Forward' | localize" :container-class="'pagination'" :page-class="'waves-effect'"/>
     </section>
   </div>
 </template>
@@ -21,9 +21,13 @@
 <script>
   import paginationMixin from '../mixins/pagination';
   import {Pie} from 'vue-chartjs';
+  import localizeFilter from "../filters/localize";
 
   export default {
     name: "History",
+    metaInfo() {
+      return {title: this.$title('Menu_History')}
+    },
     data: () => ({
       loading: true,
       records: []
@@ -43,7 +47,7 @@
             ...it,
             categoryName: categories.find(item => item.id === it.categoryId).title,
             typeClass: it.type === 'income' ? 'green' : 'red',
-            typeText: it.type === 'income' ? 'Доход' : 'Расход',
+            typeText: it.type === 'income' ? localizeFilter('Income') : localizeFilter('Outcome') ,
             index: idx + 1
           }
         }));
@@ -58,7 +62,7 @@
             }, '');
           }).map(it => it.title),
           datasets: [{
-            label: 'Расходы по категориям',
+            label: localizeFilter('CostsForCategories'),
             data: categories.map(it => {
               return this.records.reduce((acc, item) => {
                 if (item.categoryId === it.id && item.type === 'outcome') {
