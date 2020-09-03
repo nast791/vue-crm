@@ -63,7 +63,7 @@
           name: this.name,
           locale: this.isRuLocale ? 'ru-RU' : 'en-US'
         })
-        this.$message(localizeFilter('Name_HasBeenUpdated'));
+        this.$message(localizeFilter('Profile_HasBeenUpdated'));
       }
     }
   }
